@@ -1,0 +1,13 @@
+{
+	"brandinput": "F:\\JetBrains\\officeTools\\brandtest\\config\\brandinput.png",
+	"brandinputblank": "F:\\JetBrains\\officeTools\\brandtest\\config\\brandinputblank.png",
+	"cancelkey": "F:\\JetBrains\\officeTools\\brandtest\\config\\cancelkey.png",
+	"cuowu": "F:\\JetBrains\\officeTools\\brandtest\\config\\cuowu.png",
+	"savekey": "F:\\JetBrains\\officeTools\\brandtest\\config\\savekey.png",
+	"succ": "F:\\JetBrains\\officeTools\\brandtest\\config\\succ.png",
+	"tempfoler": "F:\\JetBrains\\officeTools\\brandtest\\config\\temp\\",
+	"errorvalue": 0.52,
+	"succvalue": 0.6,
+	"pos_x": 500,
+	"pos_y": 500
+}
