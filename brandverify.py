@@ -2,7 +2,6 @@ import csv
 import json
 import pyautogui
 import time
-import pyperclip
 import cv2
 import os
 import win32gui
@@ -215,7 +214,7 @@ def brandverify(brand):
         screenshotregion(CONFIG["tempfoler"]+'verify-before.png')
         screenshotregion(CONFIG["tempfoler"]+'savekey-before.png', CONFIG["savekey"], mode="save&continue")
         # imgAutoCick(CONFIG["cancelkey"], pyautogui.click, debug=False, ex_para="rightborder")
-        duration = 0.5 + random.uniform(0.1, 1.0)
+        duration = 0.5 + random.uniform(0.1, 0.5)
         print(duration)
         pyautogui.moveTo(CONFIG["pos_x"], CONFIG["pos_y"], duration, pyautogui.easeOutQuad)
         pyautogui.click()
@@ -236,7 +235,7 @@ def brandverify(brand):
                 else:
                     result = -1
 
-                duration = 0.5 + random.uniform(0.1, 1.0)
+                duration = 0.5 + random.uniform(0.1, 0.5)
                 print(duration)
                 pyautogui.moveTo(CONFIG["pos_x"], CONFIG["pos_y"], duration, pyautogui.easeOutQuad)
                 pyautogui.click()
@@ -280,9 +279,9 @@ def main():
     filepath = filepath.replace("\'", "").replace("\"", "")
     fd = open(filepath)
     f_csv = csv.reader(fd)
-    list = [x for x in f_csv]
+    brandlist = [list(filter(None, x)) for x in f_csv]
     fd.close()
-    print(list)
+    print(brandlist)
     # return
     handle = win32gui.FindWindow("Qt5QWindowIcon", "闪店云管家")
     win32gui.ShowWindow(handle, win32con.SW_SHOWMAXIMIZED)
@@ -298,7 +297,7 @@ def main():
     # list = ["asf", "skam", "asdf", "asdff"]
     cnt = 0
     try:
-        for sublist in list:
+        for sublist in brandlist:
             for i in sublist:
                 cnt += 1
                 print("{}-{}:开始验证".format(cnt, i))
@@ -343,12 +342,12 @@ def main():
 if __name__ == "__main__":
     # qqtest()
     main()
-    # fd = open("1.csv")
+    # fd = open("测品牌-20221109.csv")
     # f_csv = csv.reader(fd)
-    # list = [i for i in f_csv]
+    # list = [list(filter(None, i)) for i in f_csv]
     # print(list)
     # fd.close()
-
+    #
     # for sublist in list:
     #     for i in sublist:
     #         print(i)
