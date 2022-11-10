@@ -9,8 +9,10 @@ import win32con
 import comparepic
 import random
 import sys
+import msvcrt
 
 CONFIG = dict()
+
 
 def imgAutoCick(tempFile, whatDo, debug=False, ex_para=None, shotFlag=False):
     '''
@@ -27,10 +29,10 @@ def imgAutoCick(tempFile, whatDo, debug=False, ex_para=None, shotFlag=False):
         debug   :是否开启显示调试窗口
     '''
     # 读取屏幕，并保存到本地
-    pyautogui.screenshot(CONFIG["tempfoler"]+'big.png')
+    pyautogui.screenshot(CONFIG["tempfoler"] + 'big.png')
 
     # 读入背景图片
-    gray = cv2.imread(CONFIG["tempfoler"]+"big.png", 0)
+    gray = cv2.imread(CONFIG["tempfoler"] + "big.png", 0)
     # 读入需要查找的图片
     img_template = cv2.imread(tempFile, 0)
 
@@ -60,7 +62,7 @@ def imgAutoCick(tempFile, whatDo, debug=False, ex_para=None, shotFlag=False):
         offset_w = 0
         offset_h = 0
     print(top + w / 2 + offset_w, left + h / 2 + offset_h)
-    duration = 0.5+random.uniform(0.1, 1.0)
+    duration = 0.5 + random.uniform(0.1, 1.0)
     print(duration)
     pyautogui.moveTo(top + w / 2 + offset_w, left + h / 2 + offset_h, duration, pyautogui.easeOutQuad)
     if "scroll" in str(whatDo):
@@ -71,12 +73,12 @@ def imgAutoCick(tempFile, whatDo, debug=False, ex_para=None, shotFlag=False):
         whatDo()
         print(str(whatDo))
         if shotFlag:
-            pyautogui.screenshot(CONFIG["tempfoler"]+'pic-shot-before.png')
+            pyautogui.screenshot(CONFIG["tempfoler"] + 'pic-shot-before.png')
     # print(whatDo)
 
     if debug:
         # 读取原图
-        img = cv2.imread(CONFIG["tempfoler"]+"big.png", 1)
+        img = cv2.imread(CONFIG["tempfoler"] + "big.png", 1)
         # 在原图上画矩形
         cv2.rectangle(img, top_left, bottom_right, (0, 0, 255), 2)
         # 调试显示
@@ -85,7 +87,7 @@ def imgAutoCick(tempFile, whatDo, debug=False, ex_para=None, shotFlag=False):
         cv2.waitKey(0)
         # 销毁所有窗口
         cv2.destroyAllWindows()
-    os.remove(CONFIG["tempfoler"]+"big.png")
+    os.remove(CONFIG["tempfoler"] + "big.png")
 
 
 def img2AutoCick(tempFile1, tempFile2, whatDo, debug=False, ex_para=None, shotFlag=False):
@@ -103,10 +105,10 @@ def img2AutoCick(tempFile1, tempFile2, whatDo, debug=False, ex_para=None, shotFl
         debug   :是否开启显示调试窗口
     '''
     # 读取屏幕，并保存到本地
-    pyautogui.screenshot(CONFIG["tempfoler"]+'big.png')
+    pyautogui.screenshot(CONFIG["tempfoler"] + 'big.png')
 
     # 读入背景图片
-    gray = cv2.imread(CONFIG["tempfoler"]+"big.png", 0)
+    gray = cv2.imread(CONFIG["tempfoler"] + "big.png", 0)
     # 读入需要查找的图片1
     img_template1 = cv2.imread(tempFile1, 0)
     # 读入需要查找的图片2
@@ -149,7 +151,7 @@ def img2AutoCick(tempFile1, tempFile2, whatDo, debug=False, ex_para=None, shotFl
     # 先移动再操作， 进行点击动作，可以修改为其他动作
     # print(pyautogui.position())
     print(x2[0] + x2[2] / 2, x2[1] + x2[3] / 2)
-    duration = 0.5+random.uniform(0.1, 1.0)
+    duration = 0.5 + random.uniform(0.1, 1.0)
     print(duration)
     pyautogui.moveTo(x2[0] + x2[2] / 2, x2[1] + x2[3] / 2, duration, pyautogui.easeOutQuad)
     if "scroll" in str(whatDo):
@@ -160,12 +162,12 @@ def img2AutoCick(tempFile1, tempFile2, whatDo, debug=False, ex_para=None, shotFl
         whatDo()
         print(str(whatDo))
         if shotFlag:
-            pyautogui.screenshot(CONFIG["tempfoler"]+'pic-shot-before.png')
+            pyautogui.screenshot(CONFIG["tempfoler"] + 'pic-shot-before.png')
     # print(whatDo)
 
     if debug:
         # 读取原图
-        img = cv2.imread(CONFIG["tempfoler"]+"big.png", 1)
+        img = cv2.imread(CONFIG["tempfoler"] + "big.png", 1)
         # 在原图上画矩形
         cv2.rectangle(img, top_left1, bottom_right1, (0, 0, 255), 2)
         # 在原图上画矩形
@@ -176,7 +178,7 @@ def img2AutoCick(tempFile1, tempFile2, whatDo, debug=False, ex_para=None, shotFl
         cv2.waitKey(0)
         # 销毁所有窗口
         cv2.destroyAllWindows()
-    os.remove(CONFIG["tempfoler"]+"big.png")
+    os.remove(CONFIG["tempfoler"] + "big.png")
 
 
 def donothing(para=None):
@@ -207,14 +209,14 @@ def brandverify(brand):
         #              'F:\\JetBrains\\officeTools\\brandtest\\brandinputblank.png', pyautogui.click, False)
         img2AutoCick(CONFIG["brandinput"], CONFIG["brandinputblank"], pyautogui.click, False)
         pyautogui.hotkey('Ctrl', 'a')
-        time.sleep(0.5)
+        time.sleep(random.uniform(0.1, 0.5))
         pyautogui.press('delete')
-        time.sleep(0.5)
+        time.sleep(random.uniform(0.1, 0.5))
         pyautogui.typewrite(brand)
-        screenshotregion(CONFIG["tempfoler"]+'verify-before.png')
-        screenshotregion(CONFIG["tempfoler"]+'savekey-before.png', CONFIG["savekey"], mode="save&continue")
+        screenshotregion(CONFIG["tempfoler"] + 'verify-before.png')
+        screenshotregion(CONFIG["tempfoler"] + 'savekey-before.png', CONFIG["savekey"], mode="save&continue")
         # imgAutoCick(CONFIG["cancelkey"], pyautogui.click, debug=False, ex_para="rightborder")
-        duration = 0.5 + random.uniform(0.1, 0.5)
+        duration = random.uniform(0.1, 0.5)
         print(duration)
         pyautogui.moveTo(CONFIG["pos_x"], CONFIG["pos_y"], duration, pyautogui.easeOutQuad)
         pyautogui.click()
@@ -224,9 +226,9 @@ def brandverify(brand):
                 print("超时")
                 return
             # 读取屏幕，并保存到本地
-            screenshotregion(CONFIG["tempfoler"]+'verify-tmp.png')
+            screenshotregion(CONFIG["tempfoler"] + 'verify-tmp.png')
             print("{}\n".format(sys._getframe().f_lineno))
-            errorvalue = ifsamepic(CONFIG["tempfoler"]+'verify-before.png', CONFIG["tempfoler"]+'verify-tmp.png', 3)
+            errorvalue = ifsamepic(CONFIG["tempfoler"] + 'verify-before.png', CONFIG["tempfoler"] + 'verify-tmp.png', 3)
 
             if errorvalue < CONFIG["errorvalue"]:
                 print("error")
@@ -235,24 +237,24 @@ def brandverify(brand):
                 else:
                     result = -1
 
-                duration = 0.5 + random.uniform(0.1, 0.5)
+                duration = random.uniform(0.1, 0.5)
                 print(duration)
                 pyautogui.moveTo(CONFIG["pos_x"], CONFIG["pos_y"], duration, pyautogui.easeOutQuad)
                 pyautogui.click()
                 break
             time.sleep(1)
-            screenshotregion(CONFIG["tempfoler"]+'savekey-tmp.png', CONFIG["savekey"], mode="save&continue")
+            screenshotregion(CONFIG["tempfoler"] + 'savekey-tmp.png', CONFIG["savekey"], mode="save&continue")
             print("{}\n".format(sys._getframe().f_lineno))
-            if ifsamepic(CONFIG["succ"], CONFIG["tempfoler"]+'savekey-tmp.png', 3) > CONFIG["succvalue"]:
+            if ifsamepic(CONFIG["succ"], CONFIG["tempfoler"] + 'savekey-tmp.png', 3) > CONFIG["succvalue"]:
                 print("succ")
                 result = 0
                 break
             time.sleep(1)
             print("等待跳转中...")
-        os.remove(CONFIG["tempfoler"]+'savekey-before.png')
-        os.remove(CONFIG["tempfoler"]+'savekey-tmp.png')
-        os.remove(CONFIG["tempfoler"]+'verify-before.png')
-        os.remove(CONFIG["tempfoler"]+'verify-tmp.png')
+        os.remove(CONFIG["tempfoler"] + 'savekey-before.png')
+        os.remove(CONFIG["tempfoler"] + 'savekey-tmp.png')
+        os.remove(CONFIG["tempfoler"] + 'verify-before.png')
+        os.remove(CONFIG["tempfoler"] + 'verify-tmp.png')
     except Exception as e:
         print(repr(e))
     return result
@@ -286,8 +288,7 @@ def main():
     handle = win32gui.FindWindow("Qt5QWindowIcon", "闪店云管家")
     win32gui.ShowWindow(handle, win32con.SW_SHOWMAXIMIZED)
     win32gui.SetForegroundWindow(handle)
-
-
+    time.sleep(1)
     available = []
     invalidBrand = []
     invalidEAN = []
@@ -296,6 +297,7 @@ def main():
     time_start = time.time()
     # list = ["asf", "skam", "asdf", "asdff"]
     cnt = 0
+    escflag = False
     try:
         for sublist in brandlist:
             for i in sublist:
@@ -314,11 +316,45 @@ def main():
                 else:
                     print("异常")
                     abnormal.append(i)
-                # break
-            # break
+                if cnt // 100 > 0 and cnt % 100 == 0:
+                    print(available)
+                    print(invalidBrand)
+                    print(invalidEAN)
+                    print(abnormal)
+                    parentpath = os.path.dirname(filepath) + "\\"
+                    resultreport = parentpath + "\\report.csv"
+                    fp = open(resultreport, 'a')
+                    fp.write("{}前可用".format(cnt) + ',')
+                    fp.write(",".join(available) + '\n')
+                    fp.write("{}前不可用".format(cnt) + ',')
+                    fp.write(",".join(invalidBrand) + '\n')
+                    # fp.write("EAN" + ',')
+                    # fp.write(",".join(invalidEAN) + '\n')
+                    fp.write("{}前异常".format(cnt) + ',')
+                    fp.write(",".join(abnormal) + '\n')
+                    fp.close()
+                start_time = time.time()
+                while True:
+                    if msvcrt.kbhit():
+                        chr = msvcrt.getche()
+                        if ord(chr) == 27:  # ESC
+                            print("esc:{}".format((time.time() - start_time)))
+                            keyIn = input("按回车确认退出, 输入其他键按回车取消退出\n")
+                            if keyIn == "":
+                                escflag = True
+                            else:
+                                escflag = False
+                            break
+                    if (time.time() - start_time) > 1:
+                        break
+                if escflag:
+                    break
+            if escflag:
+                break
     except Exception as e:
         print(repr(e))
     time_end = time.time()
+    # '''
     print(available)
     print(invalidBrand)
     print(invalidEAN)
@@ -335,6 +371,7 @@ def main():
     fp.write("异常" + ',')
     fp.write(",".join(abnormal) + '\n')
     fp.close()
+    # '''
     input("已生成报告, 耗时时间:{}, 平均耗时:{}, 按回车键结束".format(time_end - time_start, (time_end - time_start) / cnt))
     return
 
@@ -342,6 +379,37 @@ def main():
 if __name__ == "__main__":
     # qqtest()
     main()
+    # time.sleep(5)
+    # sys.stdin.flush()
+    # start_time = time.time()
+    # while True:
+    #     # if msvcrt.kbhit():
+    #     chr = msvcrt.getche()
+    #     if ord(chr) == 27:  # ESC
+    #         print("esc:{}".format((time.time() - start_time)))
+    #         break
+    #     if (time.time() - start_time) > 10:
+    #         print("timeout")
+    #         break
+
+    # available = ['1', "2", '3']
+    # invalidBrand = ['4', '5', '6', '7']
+    # invalidEAN = ['8', '9', '10', '11', '12']
+    # abnormal = ['13', '14', '15', '16', '17']
+    # resultreport = "aa.csv"
+    # for i in range(1000):
+    #     if i // 100 > 0 and i % 100 == 0:
+    #         print(i)
+    #         fp = open(resultreport, 'a')
+    #         fp.write("{}前可用".format(i) + ',')
+    #         fp.write(",".join(available) + '\n')
+    #         fp.write("{}前不可用".format(i) + ',')
+    #         fp.write(",".join(invalidBrand) + '\n')
+    #         # fp.write("EAN" + ',')
+    #         # fp.write(",".join(invalidEAN) + '\n')
+    #         fp.write("{}前异常".format(i) + ',')
+    #         fp.write(",".join(abnormal) + '\n')
+    #         fp.close()
     # fd = open("测品牌-20221109.csv")
     # f_csv = csv.reader(fd)
     # list = [list(filter(None, i)) for i in f_csv]
