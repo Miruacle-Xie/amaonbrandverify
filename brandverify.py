@@ -344,6 +344,8 @@ def main():
                                 escflag = True
                             else:
                                 escflag = False
+                                while msvcrt.kbhit():
+                                    msvcrt.getche()
                             break
                     if (time.time() - start_time) > 1:
                         break
@@ -379,14 +381,31 @@ def main():
 if __name__ == "__main__":
     # qqtest()
     main()
+
+    # start_time = time.time()
+    # while True:
+    #     chr = msvcrt.kbhit()
+    #     print(chr)
+    #     if chr:
+    #         chr1 = msvcrt.getche()
+    #         print(str(chr1)+"---------")
+    #         time.sleep(0.5)
+    #
+    #     if (time.time() - start_time) > 10:
+    #         print("timeout")
+    #         break
     # time.sleep(5)
     # sys.stdin.flush()
+    # time.sleep(3)
     # start_time = time.time()
     # while True:
     #     # if msvcrt.kbhit():
     #     chr = msvcrt.getche()
     #     if ord(chr) == 27:  # ESC
     #         print("esc:{}".format((time.time() - start_time)))
+    #         while msvcrt.kbhit():
+    #             a = msvcrt.getche()
+    #             print(a)
     #         break
     #     if (time.time() - start_time) > 10:
     #         print("timeout")
